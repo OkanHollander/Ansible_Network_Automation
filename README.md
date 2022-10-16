@@ -1,0 +1,1 @@
+Red Hat Certified Specialist in Ansible Network Automation
