@@ -5,7 +5,7 @@
   gather_facts: false
   connection: network_cli
 
-  task:
+  tasks:
     - name: "OSPF CONFIG"
       cisco.ios.ios_config:
         lines:
