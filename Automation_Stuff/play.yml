@@ -1,7 +1,7 @@
 ---
 
 - name: MY FIRST PLAYBOOK
-  hosts: cisco
+  hosts: north
   gather_facts: false
   connection: network_cli
 
