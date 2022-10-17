@@ -7,4 +7,4 @@
   tasks:
     - name: "Accessing variables"
       debug:
-        msg: "{{ hostvars[ansible_host].ospf.rid }}"
+        msg: "{{ hostvars[ansible_host].ospf }}"
