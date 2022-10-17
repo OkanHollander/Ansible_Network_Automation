@@ -1,0 +1,16 @@
+---
+
+- name: "Playbook to test conditional logic"
+  hosts: south
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: Gather all legacy facts
+      cisco.ios.ios_facts:
+        gather_subset: all
+
+    - debug:
+        msg: "Interface {{item['key']}} has an IP address of {{ item['value']['ipv4'][0]['address'] }}"
+      loop: "{{ ansible_net_interfaces | dict2items }}"
+      when: item['value']['lineprotocol'] == 'up'
