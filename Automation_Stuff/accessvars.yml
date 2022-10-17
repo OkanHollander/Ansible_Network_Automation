@@ -1,0 +1,10 @@
+---
+
+- name: "Accessing vars"
+  hosts: north
+  gather_facts: false
+
+  tasks:
+    - name: "Accessing variables"
+      debug:
+        msg: "{{ hostvars[ansible_host].ospf.rid }}"
