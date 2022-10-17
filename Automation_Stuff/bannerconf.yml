@@ -9,8 +9,15 @@
     - name: "Configure MOTD Banner"
       cisco.ios.ios_banner:
         banner: motd
-        text: |
-          This is my banner for all of my Devices in my network
+        text: |                                                                                                                                                       
+          #     #                                           ### 
+          #  #  # ###### #       ####   ####  #    # ###### ### 
+          #  #  # #      #      #    # #    # ##  ## #      ### 
+          #  #  # #####  #      #      #    # # ## # #####   #  
+          #  #  # #      #      #      #    # #    # #          
+          #  #  # #      #      #    # #    # #    # #      ### 
+            ## ##  ###### ######  ####   ####  #    # ###### ### 
+                                                                                                                                                                                                              
         state: present
 
       register: my_banner
