@@ -1,0 +1,11 @@
+---
+
+- name: "Loop test"
+  hosts: south
+  gather_facts: true
+  connection: network_cli
+
+  tasks:
+    - name: "Loop through IP info"
+      debug:
+        msg: "{{ansible_facts}}"
