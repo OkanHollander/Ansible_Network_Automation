@@ -1,0 +1,10 @@
+---
+
+- name: "Print variables"
+  hosts: test_work
+  gather_facts: false
+
+  tasks:
+    - name: "Task 1"
+      debug:
+        msg: "{{ eigrp_style }}"
