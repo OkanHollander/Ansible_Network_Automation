@@ -6,8 +6,11 @@
   connection: network_cli
 
   tasks:
-    - name: "Task 1"
-      cisco.ios.ios_facts:
-        gather_subset: all
-    - debug:
-        msg: "{{ ansible_net_interfaces }}"
+    - name: "Task 1 ----- Push Config"
+      cisco.ios.ios_config:
+        src: "ntp.j2"
+      register: ntp_result
+    
+    - name: "Task 2 ----- Print config"
+      debug:
+        msg: "{{ntp_result}}"
