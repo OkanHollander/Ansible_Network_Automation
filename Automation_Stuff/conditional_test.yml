@@ -1,7 +1,7 @@
 ---
 
 - name: "Playbook to test conditional logic"
-  hosts: south
+  hosts: cisco
   gather_facts: false
   connection: network_cli
 
