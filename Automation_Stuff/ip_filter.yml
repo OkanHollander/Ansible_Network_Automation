@@ -1,0 +1,11 @@
+---
+
+- name: "IP Filter test"
+  hosts: test_work
+
+  tasks:
+    - name: "IP addr filter"
+      vars:
+        myIp: "192.168.55.25/22"
+      debug:
+        msg: "{{ myIp | ansible.utils.ipaddr('network')}}"
