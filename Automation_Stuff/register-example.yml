@@ -1,0 +1,13 @@
+---
+
+- name: "Register Template Example"
+  hosts: test_work
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "Task 1"
+      cisco.ios.ios_facts:
+        gather_subset: all
+    - debug:
+        msg: "{{ ansible_net_interfaces }}"
