@@ -1,0 +1,22 @@
+---
+
+- name: "Filter Test"
+  hosts: test_work
+
+  tasks:
+    - name: "Testing some filter stsuff"
+      vars:
+        mylist:
+          - 5
+          - 10
+          - 4
+          - 44
+          - 21
+        mylist2:
+          - 5
+          - 20
+          - 4
+          - 33
+          - 21
+      debug:
+        msg: "{{ mylist | difference(mylist2)}}"
