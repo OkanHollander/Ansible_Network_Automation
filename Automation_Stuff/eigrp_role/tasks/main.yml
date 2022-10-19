@@ -1,2 +1,21 @@
 ---
 # tasks file for eigrp_role
+
+- name: "TASK 1 --- {{ TASK_ONE_NAME }}"
+  cisco.ios.ios_config:
+    src: "{{ eigrp_template }}"
+  register: eigrp_result
+
+- name: "TASK 2 --- {{ TASK_TWO_NAME }}"
+  debug:
+    msg: "{{ eigrp_result }}"
+
+- name: "TASK 3 --- {{ TASK_THREE_NAME }}"
+  cisco.ios.ios_command:
+    commands:
+      - "show run | s bgp"
+  register: eigrp_show_output
+
+- name: "TASK 4 --- {{ TASK_FOUR_NAME }}"
+  debug:
+    msg: "{{ eigrp_show_output }}"
