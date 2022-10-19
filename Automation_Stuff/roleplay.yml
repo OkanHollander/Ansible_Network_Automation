@@ -1,0 +1,26 @@
+---
+
+- name: "Playbook to configure EIGRP"
+  hosts: test_work
+  connection: network_cli
+
+  tasks:
+    - name: "TASK 1 --- push EIGRP"
+      cisco.ios.ios_config:
+        src: "eigrp.j2"
+      register: eigrp_result
+    
+    - name: "TASK 2 --- print EIGRP config"
+      debug:
+        msg: "{{ eigrp_result }}"
+    
+    - name: "TASK 3 --- verify EIGRP config"
+      cisco.ios.ios_command:
+        commands:
+          - "show run | s eigrp"
+      register: show_eigrp_output
+    
+    - name: "Task 4 --- show EIGRP output"
+      debug:
+        msg: "{{ show_eigrp_output.stdout_lines }}"
+
