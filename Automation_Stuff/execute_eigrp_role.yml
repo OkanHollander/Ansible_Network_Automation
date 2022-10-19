@@ -1,0 +1,8 @@
+---
+
+- name: "Playbook that does eigrp stuff"
+  hosts: test_work
+  connection: network_cli
+
+  roles:
+    - eigrp_role
