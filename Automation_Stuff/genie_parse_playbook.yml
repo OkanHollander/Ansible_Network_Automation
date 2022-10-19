@@ -1,0 +1,20 @@
+---
+
+- name: "Playbook 1 testing genie"
+  hosts: north
+  connection: network_cli
+
+  tasks:
+    - name: "Task 1 - send a show command"
+      cisco.ios.ios_command:
+        commands: "show version"
+      register: show_version_output
+
+    - name: "Task 2 - Parse show command"
+      set_fact: 
+        parsed_data: >-
+          {{ show_version_output.stdout[0] | clay584.genie.parse_genie(command='show version', os='ios') }}
+    
+    - name: "Task 3 - Print output"
+      debug:
+        msg: "{{ parsed_data }}"
