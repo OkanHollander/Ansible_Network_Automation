@@ -12,7 +12,7 @@
           - router-id {{ ospf.rid }}
           - network 0.0.0.0 255.255.255.255 area 0
       register: cisco_output
-      when: ansible_network_os == cisco.ios.ios
+      when: "ansible_network_os == 'cisco.ios.ios'"
     
     - name: "Task 2 --- Display OSPF config"
       debug:
