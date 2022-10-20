@@ -1,0 +1,19 @@
+---
+
+- name: "OSPF Playbook"
+  hosts: south
+  connection: network_cli
+
+  tasks:
+    - name: "Task 1 --- Push OSPF config"
+      cisco.ios.ios_config:
+        lines:
+          - router ospf 1
+          - router-id {{ ospf.rid }}
+          - network 0.0.0.0 255.255.255.255 area 0
+      register: cisco_output
+      when: ansible_network_os == cisco.ios.ios
+    
+    - name: "Task 2 --- Display OSPF config"
+      debug:
+        msg: "{{ cisco_output }}"
