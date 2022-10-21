@@ -1,0 +1,29 @@
+---
+
+- name: "Playbook BGP via Jinja"
+  hosts: south
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "Task 1 --- Configure BGP on Cisco device"
+      cisco.ios.ios_config:
+        src: "{{ ansible_network_os }}--bgp.j2"
+      register: cisco_output
+      when: "ansible_network_os == 'cisco.ios.ios'"
+    
+    - name: "Task 2 --- Print output"
+      debug:
+        msg: "{{ cisco_output }}"
+      when: "ansible_network_os == 'cisco.ios.ios'"
+
+    - name: "Task 3 --- Configure BGP on VyOs device"
+      vyos.vyos.vyos_config:
+        scr: "{{ ansible_network_os }}--bgp.j2"
+      register: vyos_output
+      when: "ansible_network_os == 'vyos.vyos.vyos'"
+    
+    - name: "Task 4 --- Print output"
+      debug:
+        msg: "{{ vyos_output }}"
+      when: "ansible_network_os == 'cisco.ios.ios'"
