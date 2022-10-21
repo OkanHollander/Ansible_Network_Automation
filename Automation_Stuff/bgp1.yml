@@ -8,7 +8,7 @@
   tasks:
     - name: "Task 1 --- Configure BGP on Cisco device"
       cisco.ios.ios_config:
-        src: "{{ ansible_network_os }}--bgp.j2"
+        src: "{{ ansible_network_os }}---bgp.j2"
       register: cisco_output
       when: "ansible_network_os == 'cisco.ios.ios'"
     
@@ -19,7 +19,7 @@
 
     - name: "Task 3 --- Configure BGP on VyOs device"
       vyos.vyos.vyos_config:
-        scr: "{{ ansible_network_os }}--bgp.j2"
+        scr: "{{ ansible_network_os }}---bgp.j2"
       register: vyos_output
       when: "ansible_network_os == 'vyos.vyos.vyos'"
     
