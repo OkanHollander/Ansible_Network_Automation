@@ -1,5 +1,5 @@
-set protocols bgp lcal-as {{}}
-set protocols bgp parameters router-id {{}}
+set protocols bgp local-as {{bgp.asn}}
+set protocols bgp parameters router-id {{bgp.rid}}
 {%for neigh in bgp.neighbors %}
  set protocols bgp neighbor {{neigh}} address-family ipv4-unicast
  set protocols bgp neighbor {{neigh}} remote-as external
