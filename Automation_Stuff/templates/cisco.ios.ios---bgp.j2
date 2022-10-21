@@ -6,5 +6,5 @@ router bgp {{bgp.asn}}
 {% if bgp.networks is defined %}
 {% for netwrk in bgp.networks %}
  network {{netwrk.network}} mask {{netwrk.mask}}
-{% end for %}
+{% endfor %}
 {% endif %}
