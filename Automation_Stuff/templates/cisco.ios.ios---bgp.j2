@@ -3,6 +3,8 @@ router bgp {{bgp.asn}}
 {% for neigh in bgp.neighbors %}
  neighbor {{neigh.neighbor}} remote-as {{neigh.peer_asn}}
 {% endfor %}
+{% if bgp.networks is defined %}
 {% for netwrk in bgp.networks %}
  network {{netwrk.network}} mask {{netwrk.mask}}
 {% end for %}
+{% endif %}
