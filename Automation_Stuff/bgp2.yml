@@ -2,13 +2,22 @@
 
 - name: "BGP Playbook"
   hosts: south
-  connection: network_cli
   gather_facts: false
+  connection: network_cli
 
   tasks:
     - name: "Task 1"
-
+      cisco.ios.ios_bgp:
+        config:
+          bgp_as: "{{ bgp.asn }}"
+          router_id: "{{ bgp.rid }}"
+          log_neighbor_changes: true
+          neighbors:
+          - neighbor: "{{ item.neighbor }}"
+            remote_as: "{{ item.peer_asn }}"
+        operation: merge
       register: cisco_bgp_output
+      loop: "{{ bgp.neighbors }}"
 
     - name: "Task 2"
       debug:
