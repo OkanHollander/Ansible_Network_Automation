@@ -1,0 +1,10 @@
+router ospf 1
+ router-id {{ospf.rid}}
+
+{% for ntwrk in ospf.networks %}
+ network {{ntwrk.network}} {{ntwrk.wildcard_bits}} area {{ntwrk.area}}
+{% endfor %}
+
+{# {% if ospf.default-originate == true %}
+ default-information originate
+{% endif %} #}

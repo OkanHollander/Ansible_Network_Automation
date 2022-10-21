@@ -1,0 +1,27 @@
+---
+
+- name: "Playbook OSPF jinja template"
+  hosts: test_work
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "TASK 1 --- Configure Cisco OSPF"
+      cisco.ios.ios_config:
+        src: "{{ ansible_network_os }}--ospf.j2"
+      register: cisco_output
+      when: "ansible_network_os == 'cisco.ios.ios'"
+
+    - name: "TASK 2 --- Print Cisco OSPF output"
+      debug:
+        msg: "{{ cisco_output }}"
+
+    - name: "TASK 3 --- Configure VyOS OSPF"
+      vyos.vyos.vyos_config:
+        src: "{{ ansible_network_os }}--ospf.j2"
+      register: vyos_output
+      when: "ansible_network_os == 'vyos.vyos.vyos'"
+
+    - name: "TASK 4 --- Print VyOS OSPF output"
+      debug:
+        msg: "{{ vyos_output }}"
