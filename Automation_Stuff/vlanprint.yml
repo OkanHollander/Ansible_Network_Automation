@@ -1,0 +1,9 @@
+---
+
+- name: "VLAN config"
+  hosts: 192.168.2.17
+  connection: network_cli
+
+  tasks:
+    - name: "TASK 1"
+      template: src={{ ansible_network_os }}--vlans.j2 dest=sw2.confg
