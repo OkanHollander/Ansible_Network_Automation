@@ -1,20 +1,37 @@
 ---
 
-- name: "PlayBook"
+- name: "Playbook 1"
   hosts: localhost
 
   tasks:
-    - name: "TASK 1 --- Collect all the facts about the locahost"
+    - name: "TASK 1 of Playbook 1 --- Collect all the facts about the locahost"
       ansible.builtin.setup:
         filter:
           - "ansible_date_time"
     
-    - name: "TASK 2 --- Record the variable"
+    - name: "TASK 2 of Playbook 1  --- Record the variable"
       set_fact:
         TD: "{{ ansible_date_time.date }}"
 
-    - name: "Creating Directories"
+    - name: "TASK 3 of Playbook 1 Creating Directories"
       file:
         path: "Backup/{{ TD }}"
+        state: directory
+      run_once: true
+  
+- name: "Playbook 2"
+  hosts: north
+  connection: network_cli
+
+  tasks:
+    - name: "TASK 1 of Playbook 2 --- get interfaces status"
+      cisco.ios.ios_facts:
+        gather_subset:
+          - "config"
+      register: int_output
+
+    - name: "TASK 2 of Playbook 2 --- Create config Subdirectory"
+      file:
+        path: "Backup/{{ hostvars.localhost.TD }}/Config"
         state: directory
       run_once: true
