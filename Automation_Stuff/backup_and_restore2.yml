@@ -1,0 +1,20 @@
+---
+
+- name: "PlayBook"
+  hosts: localhost
+
+  tasks:
+    - name: "TASK 1 --- Collect all the facts about the locahost"
+      ansible.builtin.setup:
+        filter:
+          - "ansible_date_time"
+    
+    - name: "TASK 2 --- Record the variable"
+      set_fact:
+        TD: "{{ ansible_date_time.date }}"
+
+    - name: "Creating Directories"
+      file:
+        path: "Backup/{{ TD }}"
+        state: directory
+      run_once: true
