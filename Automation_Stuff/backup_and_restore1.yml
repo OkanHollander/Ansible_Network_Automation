@@ -8,12 +8,7 @@
       ansible.builtin.setup:
         filter:
           - "ansible_date_time"
-      # register: output
-
-    # - name: "TASK 2 --- Print out results"
-    #   debug:
-    #     msg: "{{ output }}"
-
-    - name : "TASK 3 --- Record the variable"
+          
+    - name : "TASK 2 --- Record the variable"
       set_fact:
         TD: "{{ ansible_date_time.date }}"
