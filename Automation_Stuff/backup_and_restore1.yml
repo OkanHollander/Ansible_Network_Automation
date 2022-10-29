@@ -1,0 +1,19 @@
+---
+
+- name: "Playbook 1"
+  hosts: localhost
+
+  tasks:
+    - name: "TASK 1 --- Collect facts about the host"
+      ansible.builtin.setup:
+        filter:
+          - "ansible_date_time"
+      # register: output
+
+    # - name: "TASK 2 --- Print out results"
+    #   debug:
+    #     msg: "{{ output }}"
+
+    - name : "TASK 3 --- Record the variable"
+      set_fact:
+        TD: "{{ ansible_date_time.date }}"
