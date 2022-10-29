@@ -35,3 +35,8 @@
         path: "Backup/{{ hostvars.localhost.TD }}/Config"
         state: directory
       run_once: true
+
+    - name: "TASK 3 of Playbook 2 --- Copy content"
+      copy:
+        content: "{{ int_output.ansible_facts.ansible_net_config }}"
+        dest: "Backup/{{ hostvars.localhost.TD}}/Config/{{ inventory_hostname }}--running-config.txt"
