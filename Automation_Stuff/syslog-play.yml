@@ -30,8 +30,16 @@
 
     - name: "TASK 3 --- Print the output"
       debug:
-        msg: "{{ task_1_output }}"
+        msg: "{{ item.commands }}"
+      loop: "{{ task_1_output.results }}"
+      loop_control:
+        label: none
+      when: item.commands is defined
 
     - name: "TASK 4 --- Print out the output"
       debug:
-        msg: "{{ task_2_output }}"
+        msg: "{{ item.commands }}"
+      loop: "{{ task_2_output.results }}"
+      loop_control:
+        label: none
+      when: item.commands is defined
