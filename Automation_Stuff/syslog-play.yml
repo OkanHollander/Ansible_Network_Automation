@@ -1,0 +1,24 @@
+---
+
+- name: "Playbook 1 --- Cisco device"
+  hosts: north
+  connection: network_cli
+
+  tasks:
+    - name: "TASK 1 --- Apply the provided configuration"
+      cisco.ios.ios_logging_global:
+        config:
+          hosts:
+            - hostname: 172.16.1.12
+            - hostname: 172.16.1.11
+            - hostname: 172.16.1.10
+            - hostname: 172.16.1.13
+              transport:
+                tcp:
+                  port: 514
+        state: merged
+      register: cisco_output
+
+    - name: "TASK 2 --- Print the output"
+      debug:
+        msg: "{{ cisco_output }}"
