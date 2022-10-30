@@ -9,16 +9,29 @@
       cisco.ios.ios_logging_global:
         config:
           hosts:
-            - hostname: 172.16.1.12
-            - hostname: 172.16.1.11
-            - hostname: 172.16.1.10
-            - hostname: 172.16.1.13
-              transport:
-                tcp:
-                  port: 514
+            - hostname: "{{ item.ip }}"
         state: merged
-      register: cisco_output
+      loop: "{{ syslog.hosts }}"
+      when: item.port is not defined
+      register: task_1_output
 
-    - name: "TASK 2 --- Print the output"
+    - name: "TASK 2 --- Apply the configured configuration incl transport"
+      cisco.ios.ios_logging_global:
+        config:
+          hosts:
+            - hostname: "{{ item.ip }}"
+              transport: 
+                tcp:
+                  port: "{{ item.port }}"
+        state: merged
+      loop: "{{ syslog.hosts }}"
+      when: item.ip and item.port is defined
+      register: task_2_output
+
+    - name: "TASK 3 --- Print the output"
       debug:
-        msg: "{{ cisco_output }}"
+        msg: "{{ task_1_output }}"
+
+    - name: "TASK 4 --- Print out the output"
+      debug:
+        msg: "{{ task_2_output }}"
