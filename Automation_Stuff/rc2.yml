@@ -22,3 +22,20 @@
         status_code:
           - 200
           - 204
+
+    - name: "TASK 2 --- Configure ACL"
+      uri:
+        url: "https://{{ ansible_host }}/restconf/data/native/ip/access-list"
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        method: PATCH # PUT
+        headers:
+          # Accept:
+          #   application/yang-data
+          Content-Type: 'application/yang-data+json'
+        body_format: json
+        body: "{{ ACL_configure }}"
+        validate_certs: false
+        status_code:
+          - 200
+          - 204
